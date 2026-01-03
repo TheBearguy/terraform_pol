@@ -1,0 +1,8 @@
+.terraform/
+*.tfplan
+*.tfstate
+crash.log
+.terraform.lock.hcl
+*.tfstate.backup
+*.pub
+terra-ec2-key
