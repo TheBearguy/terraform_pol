@@ -60,9 +60,18 @@ resource aws_security_group my_security_group {
 
 # EC2 instance
 resource "aws_instance" "my_instance" {
+    # count = 2 # This is a meta argument, It specifies how many instances will be created.
+    for_each = tomap({
+        my-hashi-micro = "t3.micro", 
+        my-hashi-medium = "t3.medium"
+    })
+
+    depends_on = [ aws_security_group.my_security_group, aws_key_pair.my_key ] # The creation of this instance depends on the existence of these instances
+
     key_name = aws_key_pair.my_key.key_name
     security_groups = [aws_security_group.my_security_group.name]
-    instance_type = var.ec2_instance_type 
+    # instance_type = var.ec2_instance_type 
+    instance_type = each.value # can access the map items
     ami = var.ec2_ami_id # ubuntu
     user_data = file("install_nginx.sh") # user_data is an arg that allows you to run some commands at startup.
     root_block_device {
@@ -70,6 +79,7 @@ resource "aws_instance" "my_instance" {
         volume_type = "gp3"
     }
     tags = {
-        Name = "my-hashi-ec2-instance"
+        # Name = "my-hashi-ec2-instance"
+        Name = each.key
     }
 }
