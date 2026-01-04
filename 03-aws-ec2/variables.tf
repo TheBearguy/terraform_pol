@@ -17,3 +17,21 @@ variable "env" {
     default = "prod"
     type = string
 }
+
+variable "instance_configs" {
+  description = "Map of instance configurations"
+  type = map(object({
+    ami_id        = string
+    instance_type = string
+  }))
+  default = {
+    "web" = {
+      ami_id        = "ami-0abcdef1234567890" # Example AMI ID, update as needed
+      instance_type = "t2.micro"
+    },
+    "app" = {
+      ami_id        = "ami-0fedcba9876543210" # Example AMI ID, update as needed
+      instance_type = "t2.small"
+    }
+  }
+}

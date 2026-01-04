@@ -58,6 +58,7 @@ resource aws_security_group my_security_group {
     }
 }
 
+
 # EC2 instance
 resource "aws_instance" "my_instance" {
     # count = 2 # This is a meta argument, It specifies how many instances will be created.
@@ -65,6 +66,7 @@ resource "aws_instance" "my_instance" {
         my-hashi-micro = "t3.micro", 
         my-hashi-medium = "t3.medium"
     })
+    # for_each = var.instance_configs
 
     depends_on = [ aws_security_group.my_security_group, aws_key_pair.my_key ] # The creation of this instance depends on the existence of these instances
 
