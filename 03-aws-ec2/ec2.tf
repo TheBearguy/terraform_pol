@@ -75,7 +75,7 @@ resource "aws_instance" "my_instance" {
     ami = var.ec2_ami_id # ubuntu
     user_data = file("install_nginx.sh") # user_data is an arg that allows you to run some commands at startup.
     root_block_device {
-        volume_size = var.ec2_root_storage_size
+        volume_size = var.env == "prod" ? 20 : var.ec2_default_root_storage_size
         volume_type = "gp3"
     }
     tags = {
