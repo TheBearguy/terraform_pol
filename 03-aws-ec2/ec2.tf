@@ -64,7 +64,7 @@ resource "aws_instance" "my_instance" {
     # count = 2 # This is a meta argument, It specifies how many instances will be created.
     for_each = tomap({
         my-hashi-micro = "t3.micro", 
-        my-hashi-medium = "t2.medium"
+        my-hashi-micro2 = "t3.micro"
         my-hashi-small = "t2.small"
     })
     # for_each = var.instance_configs
