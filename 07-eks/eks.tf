@@ -56,7 +56,7 @@ module "eks" {
     }
 
     # cluster_addons = {
-    #     vpc-cni = {
+    #     vpc-cni = { # cluster network interface
     #         most_recent = true
     #     }
     #     kube_proxy = {
